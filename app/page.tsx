@@ -13,6 +13,7 @@ import { SemesterTable } from '@/app/components/SemesterTable'
 import { AttributesPanel } from '@/app/components/AttributesPanel'
 import { CoreModal } from '@/app/components/CoreModal'
 import { SaveMapModal } from '@/app/components/SaveMapModal'
+import { CalendarPlansTable } from '@/app/components/CalendarPlansTable'
 
 import { ErrorWindow } from '@/app/components/ErrorWindow'
 
@@ -113,7 +114,7 @@ const Home = () => {
 
 	const [isAttributesPanelVisible, setIsAttributesPanelVisible] = useState(true)
 
-	const [validationResult, setValidationResult] = useState<string>('')
+	const [validationResult, setValidationResult] = useState<any>(null)
 	const [showValidationTab, setShowValidationTab] = useState(false)
 
 	const [position, setPosition] = useState({ x: 150, y: 150 })
@@ -200,12 +201,12 @@ const Home = () => {
 						: 'Данные не валидны! Найдены ошибки в плане обучения.'
 				)
 
-				setValidationResult(JSON.stringify(data, null, 2))
+				setValidationResult(data)
 				setShowValidationTab(true)
 			})
 			.catch(error => {
 				showAlert(error)
-				setValidationResult(`Ошибка: ${error.message}`)
+				setValidationResult({ error: error.message })
 				setShowValidationTab(true)
 			})
 	}
@@ -326,6 +327,21 @@ const Home = () => {
 							handleDisciplineDelete={handleDisciplineDelete}
 							handleRowDelete={handleRowDelete}
 						/>
+
+						{currentDirection && (
+							<div
+								style={{
+									marginTop: 24,
+									width: 'max-content',
+									padding: 24,
+									background: '#ffffff',
+									boxShadow: '0 4px 12px rgba(0,0,0,0.06)',
+									overflowX: 'auto',
+								}}
+							>
+								<CalendarPlansTable educationalPlanId={currentDirection.id} />
+							</div>
+						)}
 					</main>
 				</div>
 
