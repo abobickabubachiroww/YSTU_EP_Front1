@@ -131,7 +131,8 @@ export const CompetenceMatrix: React.FC<CompetenceMatrixProps> = ({
                 >
                   {comp.code}
                   <div style={{ fontSize: '11px', fontWeight: 'normal', color: '#8c8c8c' }}>
-                    {comp.name.length > 15 ? comp.name.slice(0, 15) + '...' : comp.name}
+                    {comp.name}
+                    {/* {comp.name.length > 15 ? comp.name.slice(0, 15) + '...' : comp.name} */}
                   </div>
                 </th>
               ))}
