@@ -51,7 +51,8 @@ export const AttributesPanel = ({
 		lab: number
 	) => {
 		const totalHours = lecture + practical + lab
-		const calculatedCredits = Math.floor(totalHours / 36)
+		// +1 делаем поскольку количество зачетных единиц не должно быть меньше 1
+		const calculatedCredits = Math.floor((totalHours / 36) + 1)
 		const exactValue = totalHours / 36
 
 		if (totalHours <= 0) {
